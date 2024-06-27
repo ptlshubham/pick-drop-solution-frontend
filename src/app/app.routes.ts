@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
 import { EcommerceComponent } from './dashboard/ecommerce/ecommerce.component';
-import { CrmComponent } from './dashboard/crm/crm.component';
-import { ProjectManagementComponent } from './dashboard/project-management/project-management.component';
-import { LmsComponent } from './dashboard/lms/lms.component';
-import { HelpDeskComponent } from './dashboard/help-desk/help-desk.component';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
@@ -14,13 +10,10 @@ import { LockScreenComponent } from './authentication/lock-screen/lock-screen.co
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { ConfirmEmailComponent } from './authentication/confirm-email/confirm-email.component';
 import { InternalErrorComponent } from './common/internal-error/internal-error.component';
+import { VehicleComponent } from './transporter/vehicle/vehicle.component';
 
 export const routes: Routes = [
     {path: '', component: EcommerceComponent},
-    {path: 'crm', component: CrmComponent},
-    {path: 'project-management', component: ProjectManagementComponent},
-    {path: 'lms', component: LmsComponent},
-    {path: 'help-desk', component: HelpDeskComponent},
     {
         path: 'authentication',
         component: AuthenticationComponent,
@@ -36,6 +29,22 @@ export const routes: Routes = [
     },
     {path: 'internal-error', component: InternalErrorComponent},
     // Here add new pages component
+    {path: 'add-vehicle', component: VehicleComponent},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     {path: '**', component: NotFoundComponent} // This line will remain down from the whole pages component list
 ];

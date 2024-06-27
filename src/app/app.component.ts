@@ -9,11 +9,21 @@ import { CommonModule, Location, LocationStrategy, PathLocationStrategy } from '
 import { CustomizerSettingsComponent } from './customizer-settings/customizer-settings.component';
 import { RouterOutlet, Router, NavigationCancel, NavigationEnd, RouterLink } from '@angular/router';
 import { CustomizerSettingsService } from './customizer-settings/customizer-settings.service';
-
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [CommonModule, RouterOutlet, SidebarComponent, HeaderComponent, FooterComponent, RouterLink, CustomizerSettingsComponent],
+    imports: [
+        HttpClientModule,
+        CommonModule,
+        RouterOutlet,
+        SidebarComponent,
+        HeaderComponent,
+        FooterComponent,
+        RouterLink,
+        CustomizerSettingsComponent,
+        CoreModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     providers: [
@@ -49,21 +59,21 @@ export class AppComponent {
     }
 
     // ngOnInit
-    ngOnInit(){
+    ngOnInit() {
         this.recallJsFuntions();
     }
 
     // recallJsFuntions
     recallJsFuntions() {
         this.routerSubscription = this.router.events
-        .pipe(filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
-        .subscribe(event => {
-            this.location = this.router.url;
-            if (!(event instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0);
-        });
+            .pipe(filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
+            .subscribe(event => {
+                this.location = this.router.url;
+                if (!(event instanceof NavigationEnd)) {
+                    return;
+                }
+                window.scrollTo(0, 0);
+            });
     }
 
     // Dark Mode
