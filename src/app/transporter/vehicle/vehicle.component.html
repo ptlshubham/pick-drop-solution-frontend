@@ -108,10 +108,11 @@
                         <label class="main-label d-block lh-1 mb-10 text-black">
                             Select the Vehicle body
                         </label>
-                        <mat-chip-listbox aria-label="vehicleType">
+                        <mat-chip-listbox aria-label="vehicleType" *ngIf="vehicleCapacity >=1 && vehicleCapacity<=100">
                             <mat-chip-option (click)="onVehicleTypeSelect('Open Body')"
                                 [selected]="selectedVehicleType === 'Open Body'">Open Body</mat-chip-option>
-                            <mat-chip-option (click)="onVehicleTypeSelect('Closed Body')"
+                            <mat-chip-option *ngIf="vehicleCapacity >=1 && vehicleCapacity<=50"
+                                (click)="onVehicleTypeSelect('Closed Body')"
                                 [selected]="selectedVehicleType === 'Closed Body'">Closed Body</mat-chip-option>
                         </mat-chip-listbox>
                     </div>
@@ -120,7 +121,7 @@
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Vehicle Type
                             </label>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=1 && vehicleCapacity<=10">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -139,7 +140,7 @@
                                     </mat-card-content>
                                 </mat-card>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=7 && vehicleCapacity<=50">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -158,7 +159,7 @@
                                     </mat-card-content>
                                 </mat-card>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=1 && vehicleCapacity<=100">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -177,7 +178,7 @@
                                     </mat-card-content>
                                 </mat-card>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=16 && vehicleCapacity<=50">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -201,7 +202,7 @@
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Vehicle Type
                             </label>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=5 && vehicleCapacity<=22">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -221,7 +222,7 @@
                                     </mat-card-content>
                                 </mat-card>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3" *ngIf="vehicleCapacity >=1 && vehicleCapacity<=50">
                                 <mat-card
                                     class="daxa-card best-seller-of-the-month-card mb-25 border-radius bg-white border-none d-block"
                                     [class.component-dark-theme]="themeService.isDark()"
@@ -242,21 +243,18 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <span>Open Body</span>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='LCV'">
                         <!-- For Selection of LCV 1-10 Ton Only -->
-                        <div class="row mb-10" *ngIf="selectedVehicle=='LCV'">
+                        <div class="row mb-10">
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the LCV body
                             </label>
                             <mat-chip-listbox aria-label="vehicleLcvbody">
                                 <mat-chip-option (click)="selectLCVBodyType('Open Half Body')"
-                                    [selected]="selectedVehicleType === 'Open Half Body'">Open Half
+                                    [selected]="selectedLcvBody === 'Open Half Body'">Open Half
                                     Body</mat-chip-option>
                                 <mat-chip-option (click)="selectLCVBodyType('Open Full Body')"
-                                    [selected]="selectedVehicleType === 'Open Full Body'">Open Full
+                                    [selected]="selectedLcvBody === 'Open Full Body'">Open Full
                                     Body</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
@@ -266,61 +264,87 @@
                                 Select the LCV Feet
                             </label>
                             <mat-chip-listbox aria-label="vehicleType">
-                                <mat-chip-option>8 ft</mat-chip-option>
-                                <mat-chip-option>10 ft</mat-chip-option>
-                                <mat-chip-option>14 ft</mat-chip-option>
-                                <mat-chip-option>17 ft</mat-chip-option>
-                                <mat-chip-option>19 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectedLcvFeet('8 ft')"
+                                    [selected]="selectLCVFeetType === '8 ft'">8 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectedLcvFeet('10 ft')"
+                                    [selected]="selectLCVFeetType === '10 ft'">10 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectedLcvFeet('14 ft')"
+                                    [selected]="selectLCVFeetType === '14 ft'">14 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectedLcvFeet('17 ft')"
+                                    [selected]="selectLCVFeetType === '17 ft'">17 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectedLcvFeet('19 ft')"
+                                    [selected]="selectLCVFeetType === '19 ft'">19 ft</mat-chip-option>
                             </mat-chip-listbox>
                             <!-- For 1-10 Ton LCV only -->
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='Truck'">
                         <!-- For Selection of Truck 7-50 Ton Only -->
                         <div class="row mb-10">
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Truck body
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
-                                <mat-chip-option>Open Half Body</mat-chip-option>
-                                <mat-chip-option>Open Full Body</mat-chip-option>
+                            <mat-chip-listbox aria-label="vehicleTruckbody">
+                                <mat-chip-option (click)="selectTruckBodyType('Open Half Body')"
+                                    [selected]="selectedTruckBody === 'Open Half Body'">Open Half
+                                    Body</mat-chip-option>
+                                <mat-chip-option (click)="selectTruckBodyType('Open Full Body')"
+                                    [selected]="selectedTruckBody === 'Open Full Body'">Open Full
+                                    Body</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
-                        <div class="row mb-10">
+                        <div class="row mb-10" *ngIf="selectedTruckBody!=null">
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select Tyre
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
+                            <mat-chip-listbox aria-label="vehicleTyre">
                                 <!-- For 10 Ton -->
-                                <mat-chip-option>6 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=7 && vehicleCapacity<=10"
+                                    (click)="selectTruckTyreSize('6 Tyre')"
+                                    [selected]="selectedTruckTyreSize === '6 Tyre'">6 Tyre</mat-chip-option>
                                 <!-- For 20 Ton -->
-                                <mat-chip-option>12 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=10 && vehicleCapacity<=20"
+                                    (click)="selectTruckTyreSize('12 Tyre')"
+                                    [selected]="selectedTruckTyreSize === '12 Tyre'">12
+                                    Tyre</mat-chip-option>
                                 <!-- For 30 Ton -->
-                                <mat-chip-option>14 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=20 && vehicleCapacity<=30"
+                                    (click)="selectTruckTyreSize('14 Tyre')"
+                                    [selected]="selectedTruckTyreSize === '14 Tyre'">14
+                                    Tyre</mat-chip-option>
                                 <!-- For 40 Ton -->
-                                <mat-chip-option>18 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=30 && vehicleCapacity<=40"
+                                    (click)="selectTruckTyreSize('18 Tyre')"
+                                    [selected]="selectedTruckTyreSize === '18 Tyre'">18
+                                    Tyre</mat-chip-option>
                                 <!-- For 50 Ton -->
-                                <mat-chip-option>22 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=40 && vehicleCapacity<=50"
+                                    (click)="selectTruckTyreSize('22 Tyre')"
+                                    [selected]="selectedTruckTyreSize === '22 Tyre'">22
+                                    Tyre</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
-                        <div class="row mb-10">
+                        <div class="row mb-10"
+                            *ngIf="vehicleCapacity >=7 && vehicleCapacity<=10 && selectedTruckTyreSize!=null">
                             <!-- For 10 Ton only -->
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Truck Feet
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
-                                <mat-chip-option>17 ft</mat-chip-option>
-                                <mat-chip-option>19 ft</mat-chip-option>
-                                <mat-chip-option>20 ft</mat-chip-option>
-                                <mat-chip-option>22 ft</mat-chip-option>
+                            <mat-chip-listbox aria-label="TruckSizeInFit">
+                                <mat-chip-option (click)="selectTruckSizeInFit('17 ft')"
+                                    [selected]="selectedTruckSizeInFt === '17 ft'">17 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectTruckSizeInFit('19 ft')"
+                                    [selected]="selectedTruckSizeInFt === '19 ft'">19 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectTruckSizeInFit('20 ft')"
+                                    [selected]="selectedTruckSizeInFt === '20 ft'">20 ft</mat-chip-option>
+                                <mat-chip-option (click)="selectTruckSizeInFit('22 ft')"
+                                    [selected]="selectedTruckSizeInFt === '22 ft'">22 ft</mat-chip-option>
                             </mat-chip-listbox>
                             <!-- For 10 Ton only -->
 
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='Hyva'">
                         <!-- For Selection of Hyva 16-50 Ton Only -->
                         <div class="row mb-10">
 
@@ -329,65 +353,89 @@
                             </label>
                             <mat-chip-listbox aria-label="vehicleType">
                                 <!-- For 16-20 Ton -->
-                                <mat-chip-option>10 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=16 && vehicleCapacity<=20"
+                                    (click)="selectHyvaTyreSize('10 Tyre')"
+                                    [selected]="selectedHyvaTyreSize === '10 Tyre'">10
+                                    Tyre</mat-chip-option>
                                 <!-- For 20-30 Ton -->
-                                <mat-chip-option>12 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=20 && vehicleCapacity<=30"
+                                    (click)="selectHyvaTyreSize('12 Tyre')"
+                                    [selected]="selectedHyvaTyreSize === '12 Tyre'">12
+                                    Tyre</mat-chip-option>
                                 <!-- For 31-50 Ton -->
-                                <mat-chip-option>14 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=31 && vehicleCapacity<=50"
+                                    (click)="selectHyvaTyreSize('14 Tyre')"
+                                    [selected]="selectedHyvaTyreSize === '14 Tyre'">14
+                                    Tyre</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='Trailer'">
                         <!-- For Selection of Trailer 7-50 Ton Only -->
                         <div class="row mb-10">
                             <!-- For 10 Ton only -->
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Trailer Feet
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
-                                <!-- For 1ton to 30ton same -->
-                                <mat-chip-option>20 ft</mat-chip-option>
-                                <!-- For 30 ton to 100 ton same -->
-                                <mat-chip-option>40 ft High bed</mat-chip-option>
-                                <mat-chip-option>40 ft Semi bed</mat-chip-option>
-                                <mat-chip-option>40 ft Low bed</mat-chip-option>
+                            <mat-chip-listbox aria-label="vehicleTrailerFeet">
+                                <!-- For 1ton to 20ton same -->
+                                <mat-chip-option *ngIf="vehicleCapacity >=1 && vehicleCapacity<=20"
+                                    (click)="selectTrailerSize('20 ft')" [selected]="selectedTrailerSize === '20 ft'">20
+                                    ft</mat-chip-option>
+                                <!-- For 20 ton to 100 ton same -->
+                                <mat-chip-option *ngIf="vehicleCapacity >=21 && vehicleCapacity<=100"
+                                    (click)="selectTrailerSize('40 ft High bed')"
+                                    [selected]="selectedTrailerSize === '40 ft High bed'">40 ft High
+                                    bed</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=21 && vehicleCapacity<=100"
+                                    (click)="selectTrailerSize('40 ft Semi bed')"
+                                    [selected]="selectedTrailerSize === '40 ft Semi bed'">40 ft Semi
+                                    bed</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=21 && vehicleCapacity<=100"
+                                    (click)="selectTrailerSize('>40 ft Low bed')"
+                                    [selected]="selectedTrailerSize === '>40 ft Low bed'">40 ft Low
+                                    bed</mat-chip-option>
                             </mat-chip-listbox>
                             <!-- For 1-100 Ton only -->
                         </div>
                     </div>
-                    <hr>
-                    <span>Closed Body</span>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='Tanker'">
                         <!-- For Selection of Tanker 1-50 Kilolitre Only -->
                         <div class="row mb-10">
 
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select the Tanker body
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
-                                <mat-chip-option>Metal Steel</mat-chip-option>
-                                <mat-chip-option>Stainless Steel</mat-chip-option>
+                            <mat-chip-listbox aria-label="TankerBody">
+                                <mat-chip-option (click)="selectTankerBody('Metal Steel')"
+                                    [selected]="selectedTankerBody === 'Metal Steel'">Metal Steel</mat-chip-option>
+                                <mat-chip-option (click)="selectTankerBody('Stainless Steel')"
+                                    [selected]="selectedTankerBody === 'Stainless Steel'">Stainless
+                                    Steel</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
-                        <div class="row mb-10">
+                        <div class="row mb-10" *ngIf="selectedTankerBody!=null">
 
                             <label class="main-label d-block lh-1 mb-10 text-black">
                                 Select Tyre
                             </label>
-                            <mat-chip-listbox aria-label="vehicleType">
+                            <mat-chip-listbox aria-label="TankerTyre">
                                 <!-- For 10 Ton -->
-                                <mat-chip-option>6 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=1 && vehicleCapacity<=10"
+                                    (click)="selectContainerTyreSize('6 Tyre')"
+                                    [selected]="selectedContainerTyreSize === '6 Tyre'">6 Tyre</mat-chip-option>
                                 <!-- For 10-20 Ton -->
-                                <mat-chip-option>10 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=10 && vehicleCapacity<=20"
+                                    (click)="selectContainerTyreSize('10 Tyre')"
+                                    [selected]="selectedContainerTyreSize === '10 Tyre'">10 Tyre</mat-chip-option>
                                 <!-- For 20-50 Ton -->
-                                <mat-chip-option>12 Tyre</mat-chip-option>
+                                <mat-chip-option *ngIf="vehicleCapacity >=20 && vehicleCapacity<=50"
+                                    (click)="selectContainerTyreSize('12 Tyre')"
+                                    [selected]="selectedContainerTyreSize === '12 Tyre'">12 Tyre</mat-chip-option>
                             </mat-chip-listbox>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="selectedVehicle=='Container'">
                         <!-- For Selection of Container 7-50 Ton Only -->
                         <div class="row mb-10">
                             <!-- For 5-22 Ton only -->
@@ -396,17 +444,31 @@
                             </label>
                             <mat-chip-listbox aria-label="vehicleType">
                                 <!-- For 5-8 Ton only -->
-                                <mat-chip-option>20 ft</mat-chip-option>
-                                <mat-chip-option>21 ft</mat-chip-option>
-                                <mat-chip-option>22 ft</mat-chip-option>
-                                <mat-chip-option>22 ft</mat-chip-option>
-                                <mat-chip-option>23 ft</mat-chip-option>
-                                <mat-chip-option>24 ft</mat-chip-option>
-                                <mat-chip-option>32 ft sxl</mat-chip-option>
-                                <mat-chip-option>32 ft sxl HQ</mat-chip-option>
-                                <!-- For 10-22 Ton only -->
-                                <mat-chip-option>32 ft mxl</mat-chip-option>
-                                <mat-chip-option>32 ft mxl HQ</mat-chip-option>
+                                <div *ngIf="vehicleCapacity >=5 && vehicleCapacity<=8">
+                                    <mat-chip-option (click)="selectContainerLengthSize('20 ft')"
+                                        [selected]="selectedContainerLength === '20 ft'">20 ft</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('21 ft')"
+                                        [selected]="selectedContainerLength === '21 ft'">21 ft</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('22 ft')"
+                                        [selected]="selectedContainerLength === '22 ft'">22 ft</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('23 ft')"
+                                        [selected]="selectedContainerLength === '23 ft'">23 ft</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('24 ft')"
+                                        [selected]="selectedContainerLength === '24 ft'">24 ft</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('32 ft sxl')"
+                                        [selected]="selectedContainerLength === '32 ft sxl'">32 ft sxl</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('32 ft sxl HQ')"
+                                        [selected]="selectedContainerLength === '32 ft sxl HQ'">32 ft sxl
+                                        HQ</mat-chip-option>
+                                </div>
+                                <!-- For 9-22 Ton only -->
+                                <div *ngIf="vehicleCapacity >=9 && vehicleCapacity<=22">
+                                    <mat-chip-option (click)="selectContainerLengthSize('32 ft mxl')"
+                                        [selected]="selectedContainerLength === '32 ft mxl'">32 ft mxl</mat-chip-option>
+                                    <mat-chip-option (click)="selectContainerLengthSize('32 ft mxl HQ')"
+                                        [selected]="selectedContainerLength === '32 ft mxl HQ'">32 ft mxl
+                                        HQ</mat-chip-option>
+                                </div>
                             </mat-chip-listbox>
                             <!-- For 5-22 Ton only -->
 

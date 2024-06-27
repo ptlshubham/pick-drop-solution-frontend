@@ -58,10 +58,20 @@ export class VehicleComponent {
   isToggled = false;
   currentStep: number = 0;
 
+  vehicleCapacity: any;
   selectedVehicleType: any = null;
   selectedVehicle: any = null;
-  vehicleCapacity: any;
   selectedLcvBody: any = null;
+  selectLCVFeetType: any = null;
+  selectedTruckBody: any = null;
+  selectedTruckTyreSize: any = null;
+  selectedTruckSizeInFt: any = null;
+  selectedHyvaTyreSize: any = null;
+  selectedTrailerSize: any = null;
+  selectedTankerBody: any = null;
+  selectedContainerTyreSize: any = null;
+  selectedContainerLength: any = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private basicService: BasicDetailsService,
@@ -141,18 +151,67 @@ export class VehicleComponent {
   selectVehicleBody(data: any) {
     this.selectedVehicle = null;
     this.selectedLcvBody = null;
-
+    this.selectLCVFeetType = null;
+    this.selectedTruckBody = null;
+    this.selectedTruckTyreSize = null;
+    this.selectedTruckSizeInFt = null;
+    this.selectedHyvaTyreSize = null;
+    this.selectedTrailerSize = null;
+    this.selectedTankerBody = null;
+    this.selectedContainerTyreSize = null;
+    this.selectedContainerLength = null;
     this.selectedVehicle = data;
   }
   onVehicleTypeSelect(vehicleType: string) {
-    this.selectedVehicleType = vehicleType;
+    this.selectedVehicle = null;
     this.selectedLcvBody = null;
+    this.selectedTruckBody = null;
+    this.selectLCVFeetType = null;
+    this.selectedTruckTyreSize = null;
+    this.selectedTruckSizeInFt = null;
+    this.selectedHyvaTyreSize = null;
+    this.selectedTrailerSize = null;
+    this.selectedTankerBody = null;
+    this.selectedContainerTyreSize = null;
+    this.selectedContainerLength = null;
+
+    this.selectedVehicleType = vehicleType;
   }
   onKeyUp(event: KeyboardEvent): void {
+    this.selectedVehicleType = null;
     const input = (event.target as HTMLInputElement).value;
     this.vehicleCapacity = input;
   }
   selectLCVBodyType(LcvBody: string) {
     this.selectedLcvBody = LcvBody;
   }
+  selectedLcvFeet(val: any) {
+    this.selectLCVFeetType = val;
+  }
+  selectTruckBodyType(val: any) {
+    this.selectedTruckBody = val;
+  }
+  selectTruckTyreSize(val: any) {
+    this.selectedTruckTyreSize = val;
+  }
+  selectTruckSizeInFit(val: any) {
+    this.selectedTruckSizeInFt = val;
+  }
+  selectHyvaTyreSize(val: any) {
+    this.selectedHyvaTyreSize = val;
+  }
+  selectTrailerSize(val: any) {
+    this.selectedTrailerSize = val;
+  }
+  selectTankerBody(val: any) {
+    this.selectedTankerBody = val;
+  }
+
+  selectContainerTyreSize(val: any) {
+    this.selectedContainerTyreSize = val;
+  }
+  selectContainerLengthSize(val: any) {
+    this.selectedContainerLength = val;
+  }
+
 }
